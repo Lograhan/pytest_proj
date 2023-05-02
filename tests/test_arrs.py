@@ -1,6 +1,6 @@
 import pytest
 
-from utils import arrs
+from utils import arrs, dicts
 
 
 def test_get():
@@ -8,7 +8,6 @@ def test_get():
     assert arrs.get([], -1, "test") == "test"
     with pytest.raises(IndexError):
         arrs.get([], 0, "test")
-
 
 
 def test_slice():
@@ -21,4 +20,11 @@ def test_slice():
     assert arrs.my_slice([1], 4, 3) == []
     assert arrs.my_slice(["1", "4"], -15, -2) == []
     assert arrs.my_slice(["1", [1, 2, 3], 3], 0, 4) == ['1', [1, 2, 3], 3]
-    assert  arrs.my_slice([], 1,) == []
+    assert arrs.my_slice([], 1, ) == []
+
+
+def test_get_val():
+    assert dicts.get_val({"dog": "puppy", "cat": "kitty", "1": "23", "4": "56"}, "4", 'git') == "56"
+    assert dicts.get_val({"dog": "puppy", "cat": "kitty", "1": "23", "4": "56"}, "dog", 'git') == "puppy"
+    assert dicts.get_val({"dog": "puppy", "cat": "kitty", "1": "23", "4": "56"}, 4, 'git') == "git"
+    assert dicts.get_val({}, 4, 'git') == "git"
